@@ -21,6 +21,7 @@ const dns = require('dns');
 dns.setDefaultResultOrder('ipv4first');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
 const BASE_URL = 'https://api.india.delta.exchange/v2';
 const SCAN_INTERVAL_MS = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
@@ -788,9 +789,26 @@ runScan();
 // Then repeat every hour
 const intervalId = setInterval(runScan, SCAN_INTERVAL_MS);
 
+// Start a dummy HTTP server for Render's port binding health-checks
+const PORT = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+        status: 'healthy',
+        scanCount: scanCount,
+        nextScanAt: new Date(Date.now() + SCAN_INTERVAL_MS).toLocaleString()
+    }));
+});
+
+server.listen(PORT, () => {
+    console.log(`  🌐 Web server listening on port ${PORT} (Render health-check support)`);
+});
+
 // Graceful shutdown on Ctrl+C
 process.on('SIGINT', () => {
     console.log('\n\n👋 Scheduler stopped. Total scans completed: ' + scanCount);
     clearInterval(intervalId);
-    process.exit(0);
+    server.close(() => {
+        process.exit(0);
+    });
 });
