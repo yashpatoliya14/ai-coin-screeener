@@ -23,7 +23,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE_URL = 'https://api.india.delta.exchange/v2';
-const SCAN_INTERVAL_MS = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+const SCAN_INTERVAL_MS = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
 const LOGS_DIR = path.join(__dirname, 'logs');
 
 
@@ -602,8 +602,13 @@ async function screenAllSymbols() {
 //  SECTION 5: NOTIFICATIONS & LOGGING
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════════════════════
+//  SECTION 5: NOTIFICATIONS & LOGGING
+// ═══════════════════════════════════════════════════════════════════════════════
+
 /**
- * Send a message via Telegram Bot API
+ * Send a message via Telegram Bot API, automatically chunking long text
+ * to prevent the 4096-character API limit truncation.
  */
 async function sendTelegramMessage(text) {
     const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -614,25 +619,46 @@ async function sendTelegramMessage(text) {
         return;
     }
 
-    try {
-        const url = `https://api.telegram.org/bot${token}/sendMessage`;
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: text,
-                parse_mode: 'HTML'
-            })
-        });
-        const data = await response.json();
-        if (!data.ok) {
-            console.error('❌ Telegram Bot API Error:', data.description);
-        } else {
-            console.log('📤 Telegram notification sent successfully!');
+    // Split message into safe line chunks of max 4000 characters
+    const chunks = [];
+    const lines = text.split('\n');
+    let currentChunk = '';
+
+    for (const line of lines) {
+        if ((currentChunk + '\n' + line).length > 4000) {
+            chunks.push(currentChunk);
+            currentChunk = '';
         }
-    } catch (err) {
-        console.error('❌ Failed to send Telegram notification:', err.message);
+        currentChunk += (currentChunk ? '\n' : '') + line;
+    }
+    if (currentChunk.trim()) {
+        chunks.push(currentChunk);
+    }
+
+    for (let i = 0; i < chunks.length; i++) {
+        const payload = chunks[i];
+        try {
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: payload,
+                    parse_mode: 'HTML'
+                })
+            });
+            const data = await response.json();
+            if (!data.ok) {
+                console.error(`❌ Telegram Bot API Error (Chunk ${i + 1}/${chunks.length}):`, data.description);
+            } else {
+                console.log(`📤 Telegram notification chunk ${i + 1}/${chunks.length} sent successfully!`);
+            }
+            // Small delay to prevent rate limits
+            await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (err) {
+            console.error(`❌ Failed to send Telegram notification chunk ${i + 1}/${chunks.length}:`, err.message);
+        }
     }
 }
 
@@ -671,7 +697,7 @@ function saveResultsLog(results) {
 
 
 // ═══════════════════════════════════════════════════════════════════════════════
-//  SECTION 6: SCHEDULER — RUN EVERY 4 HOURS
+//  SECTION 6: SCHEDULER — RUN EVERY 1 HOUR
 // ═══════════════════════════════════════════════════════════════════════════════
 
 let scanCount = 0;
@@ -688,31 +714,41 @@ async function runScan() {
         // Build and Send Telegram message
         let telegramMessage = `<b>📊 AI Coin Screener - Scan #${scanCount}</b>\n`;
         telegramMessage += `🕒 <i>${new Date().toLocaleString()}</i>\n\n`;
-        telegramMessage += `🔴🔴 Strong Bearish: <b>${results.strong_bearish.length}</b>\n`;
-        telegramMessage += `🔴 Bearish: <b>${results.bearish.length}</b>\n`;
-        telegramMessage += `🟢 Bullish: <b>${results.bullish.length}</b>\n`;
         telegramMessage += `🟢🟢 Strong Bullish: <b>${results.strong_bullish.length}</b>\n`;
-        telegramMessage += `⚠️ Insufficient: <b>${results.insufficient_data.length}</b>\n\n`;
+        telegramMessage += `🟢 Bullish: <b>${results.bullish.length}</b>\n`;
+        telegramMessage += `🔴 Bearish: <b>${results.bearish.length}</b>\n`;
+        telegramMessage += `🔴🔴 Strong Bearish: <b>${results.strong_bearish.length}</b>\n`;
+        telegramMessage += `\n`;
 
         if (results.strong_bullish.length > 0) {
-            telegramMessage += `<b>🟢🟢 STRONG BULLISH COINS:</b>\n`;
-            results.strong_bullish.slice(0, 15).forEach(c => {
-                telegramMessage += `• <code>${c.symbol}</code> (Price: ${c.currentPrice})\n`;
+            telegramMessage += `<b>🟢🟢 STRONG BULLISH COINS (${results.strong_bullish.length}):</b>\n`;
+            results.strong_bullish.forEach(c => {
+                telegramMessage += `• <code>${c.symbol}</code> ($${c.currentPrice})\n`;
             });
-            if (results.strong_bullish.length > 15) {
-                telegramMessage += `...and ${results.strong_bullish.length - 15} more\n`;
-            }
+            telegramMessage += `\n`;
+        }
+
+        if (results.bullish.length > 0) {
+            telegramMessage += `<b>🟢 BULLISH COINS (${results.bullish.length}):</b>\n`;
+            results.bullish.forEach(c => {
+                telegramMessage += `• <code>${c.symbol}</code> ($${c.currentPrice})\n`;
+            });
+            telegramMessage += `\n`;
+        }
+
+        if (results.bearish.length > 0) {
+            telegramMessage += `<b>🔴 BEARISH COINS (${results.bearish.length}):</b>\n`;
+            results.bearish.forEach(c => {
+                telegramMessage += `• <code>${c.symbol}</code> ($${c.currentPrice})\n`;
+            });
             telegramMessage += `\n`;
         }
 
         if (results.strong_bearish.length > 0) {
-            telegramMessage += `<b>🔴🔴 STRONG BEARISH COINS:</b>\n`;
-            results.strong_bearish.slice(0, 15).forEach(c => {
-                telegramMessage += `• <code>${c.symbol}</code> (Price: ${c.currentPrice})\n`;
+            telegramMessage += `<b>🔴🔴 STRONG BEARISH COINS (${results.strong_bearish.length}):</b>\n`;
+            results.strong_bearish.forEach(c => {
+                telegramMessage += `• <code>${c.symbol}</code> ($${c.currentPrice})\n`;
             });
-            if (results.strong_bearish.length > 15) {
-                telegramMessage += `...and ${results.strong_bearish.length - 15} more\n`;
-            }
             telegramMessage += `\n`;
         }
 
@@ -724,7 +760,7 @@ async function runScan() {
         // Print next scan time
         const nextScan = new Date(Date.now() + SCAN_INTERVAL_MS);
         console.log('');
-        console.log(`  ⏰ Next scan at: ${nextScan.toLocaleString()} (in 4 hours)`);
+        console.log(`  ⏰ Next scan at: ${nextScan.toLocaleString()} (in 1 hour)`);
         console.log('  💡 Press Ctrl+C to stop the scheduler.');
         console.log('');
 
@@ -738,10 +774,10 @@ async function runScan() {
 
 console.log('');
 console.log('═══════════════════════════════════════════════════════════');
-console.log('  AI Coin Screener — 4-Hour Scheduler');
+console.log('  AI Coin Screener — 1-Hour Scheduler');
 console.log('═══════════════════════════════════════════════════════════');
 console.log(`  Started at:    ${new Date().toLocaleString()}`);
-console.log(`  Scan interval: Every 4 hours`);
+console.log(`  Scan interval: Every 1 hour`);
 console.log(`  Logs saved to: ${LOGS_DIR}`);
 console.log('  Press Ctrl+C to stop.');
 console.log('═══════════════════════════════════════════════════════════');
@@ -749,7 +785,7 @@ console.log('══════════════════════�
 // Run immediately on start
 runScan();
 
-// Then repeat every 4 hours
+// Then repeat every hour
 const intervalId = setInterval(runScan, SCAN_INTERVAL_MS);
 
 // Graceful shutdown on Ctrl+C
