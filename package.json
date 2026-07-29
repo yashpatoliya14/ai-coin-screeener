@@ -1,0 +1,25 @@
+{
+  "name": "ai-coin-screeener",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/yashpatoliya14/ai-coin-screeener#readme",
+  "bugs": {
+    "url": "https://github.com/yashpatoliya14/ai-coin-screeener/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yashpatoliya14/ai-coin-screeener.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
