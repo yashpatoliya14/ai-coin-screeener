@@ -1,2 +1,5 @@
 /node_modules
 .env
+
+# DotSync — never commit secrets
+.env.local

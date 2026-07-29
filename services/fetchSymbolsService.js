@@ -1,3 +1,6 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const fetchSymbols = async () => {
     const response = await fetch("https://api.india.delta.exchange/v2/products")
     const data = await response.json()
