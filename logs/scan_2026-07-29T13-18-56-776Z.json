@@ -1,0 +1,409 @@
+{
+  "scanTime": "2026-07-29T13:18:56.777Z",
+  "summary": {
+    "strong_bullish": 1,
+    "bullish": 2,
+    "bearish": 23,
+    "strong_bearish": 2
+  },
+  "strong_bullish": [
+    {
+      "symbol": "1000SHIBUSD",
+      "classification": "strong_bullish",
+      "reason": "Uptrend + Optimal RSI + Vol Spike + Early Trigger",
+      "currentPrice": 0.004767,
+      "metrics": {
+        "rsi": 60.58,
+        "ema50": 0.0047,
+        "ema200": 0.0046,
+        "volMultiplier": 1.73,
+        "recentChoch": "bullish",
+        "recentSTFlip": "bullish"
+      }
+    }
+  ],
+  "bullish": [
+    {
+      "symbol": "UNIUSD",
+      "classification": "bullish",
+      "reason": "Uptrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 4.042,
+      "metrics": {
+        "rsi": 69.03,
+        "ema50": 3.8651,
+        "ema200": 3.7758,
+        "volMultiplier": 0.29,
+        "recentChoch": "bullish",
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "MSTRBUSD",
+      "classification": "bullish",
+      "reason": "Uptrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 96.8,
+      "metrics": {
+        "rsi": 50.03,
+        "ema50": 96.3111,
+        "ema200": 95.6568,
+        "volMultiplier": 2.42,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    }
+  ],
+  "strong_bearish": [
+    {
+      "symbol": "DUSKUSD",
+      "classification": "strong_bearish",
+      "reason": "Downtrend + Optimal RSI + Vol Spike + Early Trigger",
+      "currentPrice": 0.06077,
+      "metrics": {
+        "rsi": 47.55,
+        "ema50": 0.0617,
+        "ema200": 0.0647,
+        "volMultiplier": 2.18,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "MONUSD",
+      "classification": "strong_bearish",
+      "reason": "Downtrend + Optimal RSI + Vol Spike + Early Trigger",
+      "currentPrice": 0.0208,
+      "metrics": {
+        "rsi": 39.97,
+        "ema50": 0.021,
+        "ema200": 0.0215,
+        "volMultiplier": 2.09,
+        "recentChoch": "bearish",
+        "recentSTFlip": "bearish"
+      }
+    }
+  ],
+  "bearish": [
+    {
+      "symbol": "1000FLOKIUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.02046,
+      "metrics": {
+        "rsi": 37.35,
+        "ema50": 0.021,
+        "ema200": 0.0214,
+        "volMultiplier": 2.48,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "USUALUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.00778,
+      "metrics": {
+        "rsi": 31.74,
+        "ema50": 0.0081,
+        "ema200": 0.0085,
+        "volMultiplier": 3.65,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "DYDXUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.1108,
+      "metrics": {
+        "rsi": 30.86,
+        "ema50": 0.1164,
+        "ema200": 0.1214,
+        "volMultiplier": 3.83,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "BABABUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 114.93,
+      "metrics": {
+        "rsi": 45.02,
+        "ema50": 115.0082,
+        "ema200": 115.181,
+        "volMultiplier": 0.07,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "CHIPUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.02536,
+      "metrics": {
+        "rsi": 45.01,
+        "ema50": 0.0262,
+        "ema200": 0.0283,
+        "volMultiplier": 0.03,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "TRBUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 13.539,
+      "metrics": {
+        "rsi": 43.82,
+        "ema50": 13.79,
+        "ema200": 14.3622,
+        "volMultiplier": 0.03,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "GRAMUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 1.417,
+      "metrics": {
+        "rsi": 35.3,
+        "ema50": 1.4594,
+        "ema200": 1.4825,
+        "volMultiplier": 0.24,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "API3USD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.1871,
+      "metrics": {
+        "rsi": 32.79,
+        "ema50": 0.2003,
+        "ema200": 0.2135,
+        "volMultiplier": 0.01,
+        "recentChoch": "bearish",
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "STXUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.1337,
+      "metrics": {
+        "rsi": 33.8,
+        "ema50": 0.1374,
+        "ema200": 0.1464,
+        "volMultiplier": 4.29,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "ZENUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 3.837,
+      "metrics": {
+        "rsi": 38.92,
+        "ema50": 3.922,
+        "ema200": 4.0365,
+        "volMultiplier": 1.17,
+        "recentChoch": "bearish",
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "DEEPUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.01628,
+      "metrics": {
+        "rsi": 29.44,
+        "ema50": 0.0167,
+        "ema200": 0.0173,
+        "volMultiplier": 0.03,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "BILLUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.02312,
+      "metrics": {
+        "rsi": 42.98,
+        "ema50": 0.0239,
+        "ema200": 0.026,
+        "volMultiplier": 0.3,
+        "recentChoch": null,
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "AMZNXUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 230.85,
+      "metrics": {
+        "rsi": 41.24,
+        "ema50": 232.1156,
+        "ema200": 236.0669,
+        "volMultiplier": 0.04,
+        "recentChoch": "bearish",
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "FILUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.69,
+      "metrics": {
+        "rsi": 40.4,
+        "ema50": 0.7032,
+        "ema200": 0.7254,
+        "volMultiplier": 4.38,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "AIGENSYNUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.02207,
+      "metrics": {
+        "rsi": 36.43,
+        "ema50": 0.023,
+        "ema200": 0.0241,
+        "volMultiplier": 6.27,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "ALLOUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.3146,
+      "metrics": {
+        "rsi": 43.25,
+        "ema50": 0.3289,
+        "ema200": 0.382,
+        "volMultiplier": 1.59,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "JASMYUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.004295,
+      "metrics": {
+        "rsi": 46.7,
+        "ema50": 0.0043,
+        "ema200": 0.0044,
+        "volMultiplier": 0.4,
+        "recentChoch": "bullish",
+        "recentSTFlip": "bearish"
+      }
+    },
+    {
+      "symbol": "OPUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.0871,
+      "metrics": {
+        "rsi": 40.63,
+        "ema50": 0.0891,
+        "ema200": 0.0924,
+        "volMultiplier": 2.7,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "WLDUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.3042,
+      "metrics": {
+        "rsi": 38.28,
+        "ema50": 0.3201,
+        "ema200": 0.3474,
+        "volMultiplier": 2.78,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "RAREUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.01176,
+      "metrics": {
+        "rsi": 33.78,
+        "ema50": 0.012,
+        "ema200": 0.0123,
+        "volMultiplier": 2.18,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "APTUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.567,
+      "metrics": {
+        "rsi": 29.54,
+        "ema50": 0.59,
+        "ema200": 0.6042,
+        "volMultiplier": 3.25,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "BASEDUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.07881,
+      "metrics": {
+        "rsi": 49.1,
+        "ema50": 0.0799,
+        "ema200": 0.0832,
+        "volMultiplier": 0.05,
+        "recentChoch": "bearish",
+        "recentSTFlip": null
+      }
+    },
+    {
+      "symbol": "ORDERUSD",
+      "classification": "bearish",
+      "reason": "Downtrend + Optimal RSI + (Vol Spike OR Early Trigger)",
+      "currentPrice": 0.02764,
+      "metrics": {
+        "rsi": 30.16,
+        "ema50": 0.0292,
+        "ema200": 0.0316,
+        "volMultiplier": 12.23,
+        "recentChoch": null,
+        "recentSTFlip": null
+      }
+    }
+  ]
+}
